@@ -1,0 +1,14 @@
+﻿<Window x:Class="Lab3.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <TextBox Width="50" Name="N1" Height="25" Margin="50" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBox>
+        <TextBox Width="50" Name="N2" Height="25" Margin="110" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBox>
+        <TextBox Width="50" Name="Sum" Height="25" Margin="170" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBox>
+        <Button Click="ButtonBase_OnClick" Width="100" Height="25">Unsafe stuff</Button>
+    </Grid>
+</Window>

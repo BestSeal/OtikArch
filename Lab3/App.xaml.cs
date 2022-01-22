@@ -1,0 +1,9 @@
+﻿using System.Windows;
+
+namespace Lab3
+{
+
+    public partial class App : Application
+    {
+    }
+}
