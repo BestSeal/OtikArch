@@ -1,0 +1,12 @@
+bin/
+obj/
+/packages/
+riderModule.iml
+/_ReSharper.Caches/
+.idea/
+x64/
+cmake-build-debug/
+.vs/
+Debug/
+otik_dll/Debug/
+otik_dll/x64/
