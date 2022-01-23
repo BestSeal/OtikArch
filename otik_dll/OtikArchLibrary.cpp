@@ -6,6 +6,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include <clocale>
 
 using std::ofstream;
 using std::string;
@@ -36,7 +37,8 @@ int main(int argc, char* argv[])
 	res_archive = ofstream(archive_name, std::ios_base::binary);
 
 	//std::cout << file_create_metadata("D:\\University\\critical path.png", 46) << std::endl;
-	MakeArch("file.arch", 10, "\"D:\\Ivan\\Laboratory\\524.jpg\"", 29, "D:\\Ivan", 8, false, false);
+	//MakeArch("file.arch", 10, "\"D:\\Ivan\\Разное\\anekdotix-117727.jpg\"\"D:\\Ivan\\Разное\\Memes\"", 60, "D:\\Ivan", 8, false, false);
+	ExtractFrom("D:\\Ivan\\file.arch", 17, "D:\\Ivan\\new", 11, 0, 0);
 	res_archive.close();
 }
 #endif // DEBUG
@@ -52,30 +54,34 @@ bool MakeArch(const char* new_arch_name, int new_arch_name_len,
 	const char* in_path, int in_path_len, const char* out_path, int out_pathLen,
 	bool use_context_independent_compression, bool use_context_compression)
 {
+	setlocale(LC_ALL, "");
 	string arch_name = string(new_arch_name, new_arch_name_len);
 	string arch_path = string(out_path).append(1, std::filesystem::path::preferred_separator).append(arch_name);
 	ofstream new_arch(arch_path, std::ios::binary);
 
-	vector<string> files_names = dispatch_filenames(in_path, in_path_len);
-	fill_header(&new_arch, 0, files_names.size(), use_context_compression, use_context_independent_compression, 0);
+	vector<string> file_names = dispatch_filenames(in_path, in_path_len);
+	string rel_path = get_rel_path_of_files(file_names);
+	fill_header(&new_arch, 0, 0, use_context_compression, use_context_independent_compression, 0);
 	
 	uint64_t summary_size = 32;
 	new_arch.seekp(32);
-	for (int i = 0; i < files_names.size(); i++)
+
+	uint16_t file_amount = 0;
+	for (int i = 0; i < file_names.size(); i++)
 	{
-		string compressed_data = compress_string(get_file_content(files_names[i]), use_context_independent_compression, use_context_compression, 0);
-		string metadata = file_create_metadata(files_names[i], compressed_data.size());
-		new_arch << metadata;
-		new_arch << compressed_data;
-		summary_size += metadata.length() + compressed_data.length();
+		summary_size += add_file_to_archive(&new_arch, file_names[i], rel_path, &file_amount, use_context_compression,
+			use_context_independent_compression);
 	}
 
-	fill_header(&new_arch, summary_size, files_names.size(), use_context_compression, use_context_independent_compression, 0);
+	fill_header(&new_arch, summary_size, file_amount, use_context_compression, use_context_independent_compression, 0);
 	return true;
 }
 
-bool ExtractFrom(char* path, int path_length)
+bool ExtractFrom(const char* arch_path, int arch_path_len, const char* extr_path, int extr_path_len,
+	bool use_context_independent_compression, bool use_context_compression)
 {
-	string path_s = string(path, path_length);
-	return true;
+	setlocale(LC_ALL, "");
+	string arch_path_s = string(arch_path, arch_path_len);
+	string extr_path_s = string(extr_path, extr_path_len);
+	return extract_from_archive(arch_path_s, extr_path_s, use_context_independent_compression, use_context_compression, 0);
 }

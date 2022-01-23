@@ -3,7 +3,6 @@
 #include <vector>
 #include <string>
 
-constexpr char DIVIDER = ' ';
 constexpr char BRACES = '"';
 
 using std::string;
@@ -26,8 +25,6 @@ vector<string> dispatch_filenames(const char* files_names, int length)
 			}
 			continue;
 		}
-		if (files_names[i] == DIVIDER)
-			continue;
 
 		temp.push_back(files_names[i]);
 	}
