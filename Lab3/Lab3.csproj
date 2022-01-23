@@ -5,11 +5,22 @@
         <TargetFramework>net5.0-windows</TargetFramework>
         <UseWPF>true</UseWPF>
         <Platforms>x64</Platforms>
+        <Nullable>enable</Nullable>
 
     </PropertyGroup>
 
     <ItemGroup>
       <Folder Include="UnmanagedCode\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Dragablz" Version="0.0.3.223" />
+      <PackageReference Include="FontAwesome.WPF" Version="4.7.0.9" />
+      <PackageReference Include="MaterialDesignThemes" Version="4.3.0" />
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
+      <PackageReference Include="Microsoft.Extensions.Primitives" Version="6.0.0" />
+      <PackageReference Include="Ookii.Dialogs.Wpf" Version="5.0.1" />
+      <PackageReference Include="System.Drawing.Common" Version="6.0.0" />
     </ItemGroup>
 
 </Project>
