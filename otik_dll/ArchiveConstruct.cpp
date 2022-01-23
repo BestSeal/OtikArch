@@ -46,11 +46,11 @@ void fill_header(ofstream *file_pointer, uint64_t size, uint16_t files_amount, b
 	(*file_pointer) << std::setw(2) << BUILD;
 	(*file_pointer) << std::setw(2) << STATUS;
 	(*file_pointer) << std::setw(8) << size;
-	(*file_pointer) << std::setw(2) << files_amount;
+	(*file_pointer) << std::setw(3) << files_amount;
 	(*file_pointer) << std::setw(1) << cdc;
 	(*file_pointer) << std::setw(1) << cic;
 	(*file_pointer) << std::setw(1) << dlp;
-	(*file_pointer) << std::setw(5) << ""; //reserve
+	(*file_pointer) << std::setw(4) << ""; //reserve
 
 	(*file_pointer).seekp(position);
 	return;
@@ -79,9 +79,9 @@ archive_header read_header(ifstream* file_pointer)
 	header.size = std::stoull(temp);
 	temp.erase();
 
-	(*file_pointer) >> std::setw(2) >> temp;
+	(*file_pointer) >> std::setw(3) >> temp;
 	temp.erase(std::remove(temp.begin(), temp.end(), 0), temp.end());
-	header.file_amount = std::stoi(temp);
+	header.file_amount = std::stol(temp);
 	temp.erase();
 
 	(*file_pointer) >> std::setw(3) >> temp;
