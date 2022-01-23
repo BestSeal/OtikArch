@@ -33,7 +33,30 @@ string get_file_content(string path_to_file)
 	return content;
 }
 
+string get_rel_path_of_files(std::vector<string> file_names)
+{
+	string res = std::filesystem::path(file_names[0]).parent_path().string();
+	for (string file_name : file_names)
+	{
+		string path = std::filesystem::path(file_name).parent_path().string();
+		if (std::filesystem::is_regular_file(file_name) && res.length() > file_name.length())
+			res = path;
+	}
+	return res;
+}
+
+string get_rel_path_of_file(string file_name, string rel_path)
+{
+	file_name.erase(file_name.begin(), file_name.begin() + rel_path.length() + 1);
+	return file_name;
+}
+
 string compress_string(string input, bool contxtindepc, bool contxtdepc, bool protection)
+{
+	return input;
+}
+
+string uncompress_string(string input, bool contxtindepc, bool contxtdepc, bool protection)
 {
 	return input;
 }
