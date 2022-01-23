@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "StringDispatcher.h"
 #include <string>
 #include <fstream>
