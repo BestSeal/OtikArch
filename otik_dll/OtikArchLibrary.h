@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include "pch.h"
 
 #ifdef OTIKARCHKIBRARY_EXPORTS
 #define OTIKARCHKIBRARY_API __declspec(dllexport)
