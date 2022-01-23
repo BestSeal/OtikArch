@@ -72,3 +72,9 @@ bool MakeArch(char* new_arch_name, int new_arch_name_len,
 	fill_header(&new_arch, summary_size, files_names.size(), use_context_compression, use_context_independent_compression, 0);
 	return true;
 }
+
+bool ExtractFrom(char* path, int path_length)
+{
+	string path_s = string(path, path_length);
+	return true;
+}
