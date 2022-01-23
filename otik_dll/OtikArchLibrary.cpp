@@ -35,8 +35,8 @@ int main(int argc, char* argv[])
 	}
 	res_archive = ofstream(archive_name, std::ios_base::binary);
 
-	std::cout << file_create_metadata("D:\\University\\critical path.png", 46) << std::endl;
-	//fill_header(&res_archive, 0, 0, 0, 0);
+	//std::cout << file_create_metadata("D:\\University\\critical path.png", 46) << std::endl;
+	MakeArch("file.arch", 10, "\"D:\\Ivan\\Laboratory\\524.jpg\"", 29, "D:\\Ivan", 8, false, false);
 	res_archive.close();
 }
 #endif // DEBUG
@@ -48,12 +48,13 @@ int main(int argc, char* argv[])
 * @param inPath						paths to the end files to archive
 * @param outPath					where to save the end file
 */
-bool MakeArch(char* new_arch_name, int new_arch_name_len, 
-	char* in_path, int in_path_len, char* out_path, int out_pathLen, 
+bool MakeArch(const char* new_arch_name, int new_arch_name_len, 
+	const char* in_path, int in_path_len, const char* out_path, int out_pathLen,
 	bool use_context_independent_compression, bool use_context_compression)
 {
 	string arch_name = string(new_arch_name, new_arch_name_len);
-	ofstream new_arch(arch_name);
+	string arch_path = string(out_path).append(1, std::filesystem::path::preferred_separator).append(arch_name);
+	ofstream new_arch(arch_path, std::ios::binary);
 
 	vector<string> files_names = dispatch_filenames(in_path, in_path_len);
 	fill_header(&new_arch, 0, files_names.size(), use_context_compression, use_context_independent_compression, 0);

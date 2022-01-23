@@ -9,7 +9,7 @@ constexpr char BRACES = '"';
 using std::string;
 using std::vector;
 
-vector<string> dispatch_filenames(char* files_names, int length)
+vector<string> dispatch_filenames(const char* files_names, int length)
 {
 	vector<string> res;
 	bool string_start = false;

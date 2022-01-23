@@ -8,12 +8,12 @@
 #define OTIKARCHKIBRARY_API __declspec(dllimport)
 #endif
 
-extern "C" OTIKARCHKIBRARY_API bool MakeArch(char* newArchName, 
+extern "C" OTIKARCHKIBRARY_API bool MakeArch(
+	const char* newArchName,
 	int newArchNameLen, 
-	char* inPath,
+	const char* inPath,
 	int inPathLen,
-	char* outPath,
+	const char* outPath,
 	int outPathLen,
-	bool useCompression, 
-	bool useArithmeticCompression, 
+	bool use_context_independent_compression,
 	bool useContextCompression);
