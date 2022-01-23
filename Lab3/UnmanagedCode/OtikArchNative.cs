@@ -8,15 +8,14 @@ namespace Lab3.UnmanagedCode
         private const string DllFilePath = "otik_dll.dll";
 
         [DllImport(DllFilePath, CallingConvention = CallingConvention.Cdecl)]
-        public static extern bool MakeArch(StringBuilder newArchName, 
+        public static extern bool MakeArch(StringBuilder newArchName,
             int newArchNameLen,
-            StringBuilder inPath, 
+            StringBuilder inPath,
             int inPathLen,
-            StringBuilder outPath, 
+            StringBuilder outPath,
             int outPathLen,
             bool useCompression,
-            bool useArithmeticCompression, 
+            bool useArithmeticCompression,
             bool useContextCompression);
-        
     }
 }

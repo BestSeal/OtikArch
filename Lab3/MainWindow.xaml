@@ -3,12 +3,55 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        Width="800"
+        Height="450">
     <Grid>
-        <TextBox Width="50" Name="N1" Height="25" Margin="50" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBox>
-        <TextBox Width="50" Name="N2" Height="25" Margin="110" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBox>
-        <TextBox Width="50" Name="Sum" Height="25" Margin="170" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBox>
-        <Button Click="ButtonBase_OnClick" Width="100" Height="25">Unsafe stuff</Button>
+        <dragablz:TabablzControl>
+            <dragablz:TabablzControl.InterTabController>
+                <dragablz:InterTabController />
+            </dragablz:TabablzControl.InterTabController>
+            <TabItem Header="Archiver">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="73*" />
+                        <ColumnDefinition Width="319*" />
+                    </Grid.ColumnDefinitions>
+                    <ListView Name="SelectedFiles" Margin="10,10,475,10" Grid.ColumnSpan="2" />
+                    <CheckBox Content="Use compression" HorizontalAlignment="Left" Margin="184,10,0,0"
+                              VerticalAlignment="Top" Grid.Column="1" />
+                    <CheckBox Content="Use context compression" HorizontalAlignment="Left" Margin="184,35,0,0"
+                              VerticalAlignment="Top" Grid.Column="1" />
+                    <Button Content="Choose files for archive" HorizontalAlignment="Left" Margin="184,65,0,0"
+                            VerticalAlignment="Top" Height="30" Width="200" Grid.Column="1" Click="Button_Click" />
+                    <Button Content="Chose save path" HorizontalAlignment="Left" Margin="183,100,0,0" Click="ChooseSavePathOnClick"
+                            VerticalAlignment="Top" Height="30" Width="140" Grid.Column="1" />
+                    <TextBox Name="SavePath" HorizontalAlignment="Left" Margin="329,100,0,0" TextWrapping="Wrap" Text=""
+                             VerticalAlignment="Top" Width="315" Grid.Column="1" />
+                    <Label Content="Archive name:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="230,145,0,0" Grid.Column="1" Height="25"/>
+                    <TextBox Name="ArchName"  HorizontalAlignment="Left" Margin="329,140,0,0" TextWrapping="Wrap" Text=""
+                             VerticalAlignment="Top" Width="315" Grid.Column="1" />
+                    <Button Content="Create archive" HorizontalAlignment="Left" Margin="183,180,0,0" Click="MakeArchiveOnClick"
+                            VerticalAlignment="Top" Height="30" Width="140" Grid.Column="1" />
+                </Grid>
+            </TabItem>
+            <TabItem Header="Archiver viewer">
+                <Grid Background="#FFE5E5E5">
+                    <Button Content="Choose archive" HorizontalAlignment="Left" Margin="10,10,0,0"
+                            VerticalAlignment="Top" Height="28" Width="146" />
+                    <TreeView Margin="10,46,10,10" />
+                    <TextBox Name="ArchivePathView" HorizontalAlignment="Left" Margin="161,15,0,0" TextWrapping="Wrap"
+                             Text="" VerticalAlignment="Top" Width="623" />
+                </Grid>
+            </TabItem>
+        </dragablz:TabablzControl>
     </Grid>
 </Window>

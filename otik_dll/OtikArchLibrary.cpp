@@ -9,6 +9,7 @@
 
 using std::ofstream;
 using std::string;
+using std::vector;
 
 #ifdef _DEBUG
 #include <iostream>
