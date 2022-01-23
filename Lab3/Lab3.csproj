@@ -15,6 +15,7 @@
 
     <ItemGroup>
       <PackageReference Include="Dragablz" Version="0.0.3.223" />
+      <PackageReference Include="FontAwesome.WPF" Version="4.7.0.9" />
       <PackageReference Include="MaterialDesignThemes" Version="4.3.0" />
       <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
       <PackageReference Include="Microsoft.Extensions.Primitives" Version="6.0.0" />

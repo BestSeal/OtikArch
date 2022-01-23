@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
@@ -12,7 +13,7 @@
         mc:Ignorable="d"
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
-        Width="800"
+        Width="810"
         Height="450">
     <Grid>
         <dragablz:TabablzControl>
@@ -25,10 +26,10 @@
                         <ColumnDefinition Width="73*" />
                         <ColumnDefinition Width="319*" />
                     </Grid.ColumnDefinitions>
-                    <ListView Name="SelectedFiles" Margin="10,10,475,10" Grid.ColumnSpan="2" />
-                    <CheckBox Content="Use compression" HorizontalAlignment="Left" Margin="184,10,0,0"
+                    <TreeView Name="SelectedFiles" Margin="10,10,475,10" Grid.ColumnSpan="2" />
+                    <CheckBox Name="UseCompression" Content="Use compression" HorizontalAlignment="Left" Margin="184,10,0,0"
                               VerticalAlignment="Top" Grid.Column="1" />
-                    <CheckBox Content="Use context compression" HorizontalAlignment="Left" Margin="184,35,0,0"
+                    <CheckBox Name="UseContextCompression" Content="Use context compression" HorizontalAlignment="Left" Margin="184,35,0,0"
                               VerticalAlignment="Top" Grid.Column="1" />
                     <Button Content="Choose files for archive" HorizontalAlignment="Left" Margin="184,65,0,0"
                             VerticalAlignment="Top" Height="30" Width="200" Grid.Column="1" Click="Button_Click" />
@@ -41,6 +42,7 @@
                              VerticalAlignment="Top" Width="315" Grid.Column="1" />
                     <Button Content="Create archive" HorizontalAlignment="Left" Margin="183,180,0,0" Click="MakeArchiveOnClick"
                             VerticalAlignment="Top" Height="30" Width="140" Grid.Column="1" />
+                    <fa:ImageAwesome Name="Loader" Visibility="Hidden" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="400,200,0,0" Icon="Spinner" Spin="True" SpinDuration="4" Grid.Column="1" Width="100" Height="100"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Archiver viewer">

@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -37,15 +39,6 @@ namespace Lab3
                 var filePaths = openFileDialog.FileNames;
                 if (filePaths.Length <= 0) return;
 
-                var gridView = new GridView();
-                SelectedFiles.View = new GridView();
-
-                gridView.Columns.Add(new GridViewColumn()
-                {
-                    Header = "Files to archive:",
-                    DisplayMemberBinding = new Binding(nameof(FileView.FileName))
-                });
-
                 foreach (var filePath in filePaths)
                 {
                     if (!string.IsNullOrEmpty(filePath) && File.Exists(filePath))
@@ -76,20 +69,38 @@ namespace Lab3
         }
 
 
-        private void MakeArchiveOnClick(object sender, RoutedEventArgs e)
+        private async void MakeArchiveOnClick(object sender, RoutedEventArgs e)
         {
-            if (_filePaths?.Count > 0 && !string.IsNullOrEmpty(SavePath.Text) && !string.IsNullOrEmpty(ArchName.Text))
+            ShowLoader();
+            var savePath = SavePath.Text;
+            var archName = ArchName.Text;
+            var useCompression = UseCompression.IsChecked ?? false;
+            var useContextCompression = UseContextCompression.IsChecked ?? false;
+
+            var task = Task.Run(() =>
             {
-                _archInfo = new ArchInfo(ArchName.Text, _filePaths, SavePath.Text);
-                var status = OtikArchNative.MakeArch(_archInfo.ArchName,
-                    _archInfo.ArchName.Length,
-                    _archInfo.FilePaths,
-                    _archInfo.FilePaths.Length,
-                    _archInfo.OutFilaPath,
-                    _archInfo.OutFilaPath.Length,
-                    false,
-                    false,
-                    false);
+                if (_filePaths?.Count > 0 && !string.IsNullOrEmpty(savePath) &&
+                    !string.IsNullOrEmpty(archName))
+                {
+                    _archInfo = new ArchInfo(archName, _filePaths, savePath);
+                    var status = OtikArchNative.MakeArch(_archInfo.ArchName,
+                        _archInfo.ArchName.Length,
+                        _archInfo.FilePaths,
+                        _archInfo.FilePaths.Length,
+                        _archInfo.OutFilaPath,
+                        _archInfo.OutFilaPath.Length,
+                        useCompression,
+                        useContextCompression);
+                }
+            });
+
+            task.Wait();
+
+            ShowLoader();
+
+            if (task.IsCompletedSuccessfully)
+            {
+                Process.Start("explorer.exe", SavePath.Text);
             }
         }
 
@@ -101,6 +112,22 @@ namespace Lab3
             {
                 var path = openFileDialog.SelectedPath;
                 SavePath.Text = path;
+            }
+        }
+
+        private void ShowLoader()
+        {
+            switch (Loader.Visibility)
+            {
+                case Visibility.Visible:
+                    Loader.Visibility = Visibility.Collapsed;
+                    break;
+                case Visibility.Hidden:
+                    Loader.Visibility = Visibility.Visible;
+                    break;
+                case Visibility.Collapsed:
+                    Loader.Visibility = Visibility.Visible;
+                    break;
             }
         }
     }
