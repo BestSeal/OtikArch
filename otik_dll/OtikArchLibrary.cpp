@@ -38,7 +38,8 @@ int main(int argc, char* argv[])
 
 	//std::cout << file_create_metadata("D:\\University\\critical path.png", 46) << std::endl;
 	//MakeArch("file.arch", 10, "\"D:\\Ivan\\Разное\\anekdotix-117727.jpg\"\"D:\\Ivan\\Разное\\Memes\"", 60, "D:\\Ivan", 8, false, false);
-	ExtractFrom("D:\\Ivan\\file.arch", 17, "D:\\Ivan\\new", 11, 0, 0);
+	//ExtractFrom("D:\\Ivan\\file.arch", 17, "D:\\Ivan\\new", 11, 0, 0);
+	ExtractFrom("D:\\Ivan\\otik.arch", 17, "D:\\Ivan\\new", 11, 0, 0);
 	res_archive.close();
 }
 #endif // DEBUG

@@ -13,7 +13,7 @@ using std::ofstream;
 
 typedef struct archive_header {
 	uint64_t size;
-	uint16_t file_amount;
+	uint32_t file_amount;
 	bool cdc;
 	bool cic;
 	bool dl;
